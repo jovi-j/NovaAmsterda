@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Nova Amsterda 2"
+config/name="Nova Amsterdãs"
 run/main_scene="res://Scenes/Dialog/cap_1_prologo.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/bg_color=Color(0.0745098, 0.00784314, 0.0313726, 1)

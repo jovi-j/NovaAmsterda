@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkpwgt4hjgxjj"]
+[gd_scene load_steps=6 format=3 uid="uid://bkpwgt4hjgxjj"]
 
 [ext_resource type="Script" path="res://Code/Dialog/cap_1_prologo.gd" id="1_rdf1m"]
+[ext_resource type="FontFile" uid="uid://ct7amco1fsj62" path="res://Assets/Fonts/AncientModernTales.ttf" id="2_uww1e"]
 
 [sub_resource type="Animation" id="Animation_3fj83"]
 length = 0.001
@@ -110,6 +111,7 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
 theme_override_colors/font_shadow_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_fonts/font = ExtResource("2_uww1e")
 theme_override_font_sizes/font_size = 50
 text = "Natal, 9 de dezembro de 1633
 Forte dos Reis Magos"
