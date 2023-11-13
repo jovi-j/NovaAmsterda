@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://4vaexi8w83ua"]
+
+[ext_resource type="Script" path="res://addons/Fire Bullets/scripts/Bullet.gd" id="1_1haqf"]
+[ext_resource type="Texture2D" uid="uid://cmwb6pr410w4g" path="res://Assets/Sprites/Misc/bullet.png" id="2_3f5nd"]
+[ext_resource type="Script" path="res://Code/Misc/bullet_trace.gd" id="2_h56pt"]
+[ext_resource type="Gradient" uid="uid://t0sxtbwsmowk" path="res://Scenes/Misc/line2d_traced.tres" id="2_urakp"]
+
+[sub_resource type="Curve" id="Curve_ydff8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.979381, 0.947368), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_recx7"]
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 64
+collision_mask = 20
+script = ExtResource("1_1haqf")
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 2.0
+width_curve = SubResource("Curve_ydff8")
+gradient = ExtResource("2_urakp")
+script = ExtResource("2_h56pt")
+length = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_3f5nd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_recx7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

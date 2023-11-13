@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2hf1pka0kmx4"]
+
+[ext_resource type="PackedScene" uid="uid://d3k1fuo42m3st" path="res://Scenes/Characters/NPC/npc.tscn" id="1_n4y7c"]
+[ext_resource type="Script" path="res://Code/Characters/NPC/Ally/ally.gd" id="2_u1qrv"]
+[ext_resource type="Texture2D" uid="uid://dbs7bixybiyil" path="res://Assets/Sprites/Characters/Player/player.png" id="3_uh0rh"]
+
+[node name="Ally" groups=["alies"] instance=ExtResource("1_n4y7c")]
+collision_layer = 2
+collision_mask = 55
+script = ExtResource("2_u1qrv")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_uh0rh")
+
+[node name="Espada" parent="." index="3"]
+collision_mask = 4
+
+[node name="VisionArea" parent="." index="5"]
+collision_mask = 4
+
+[node name="PreAttackArea" parent="." index="6"]
+collision_mask = 4
+
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]

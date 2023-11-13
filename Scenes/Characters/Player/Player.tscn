@@ -1,0 +1,170 @@
+[gd_scene load_steps=16 format=3 uid="uid://cqmcpt8qutle4"]
+
+[ext_resource type="PackedScene" uid="uid://ixb44jte5b2g" path="res://Scenes/Characters/generic_character.tscn" id="1_2g2g3"]
+[ext_resource type="Script" path="res://Code/Characters/Player/Player.gd" id="2_nd0rh"]
+[ext_resource type="Texture2D" uid="uid://dbs7bixybiyil" path="res://Assets/Sprites/Characters/Player/player.png" id="3_u630a"]
+[ext_resource type="Script" path="res://addons/camera_2d_plus/objects/camera_2d_plus/camera_2d_plus_script.gd" id="4_d4hm8"]
+[ext_resource type="Script" path="res://Code/Misc/Arcabuz.gd" id="5_qkgco"]
+[ext_resource type="Texture2D" uid="uid://wfg7cerivfmx" path="res://Assets/Sprites/Characters/General/arcabuz.png" id="6_2uwmv"]
+[ext_resource type="PackedScene" uid="uid://4vaexi8w83ua" path="res://Scenes/Misc/bullet.tscn" id="6_i0lj8"]
+[ext_resource type="FontFile" uid="uid://ct7amco1fsj62" path="res://Assets/Fonts/AncientModernTales.ttf" id="8_nx68v"]
+[ext_resource type="Texture2D" uid="uid://pwk4sgqni1ib" path="res://Assets/Sprites/UI/mosquete.png" id="9_b1527"]
+
+[sub_resource type="Gradient" id="Gradient_jcrhi"]
+offsets = PackedFloat32Array(0.670968, 1)
+colors = PackedColorArray(0.0745098, 0.00784314, 0.0313726, 0, 0.0745098, 0.00784314, 0.0313726, 0.517647)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y7ewc"]
+gradient = SubResource("Gradient_jcrhi")
+width = 1024
+height = 1024
+fill_from = Vector2(0, 0.972477)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q6mgd"]
+bg_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a01x5"]
+bg_color = Color(0.835294, 0.235294, 0.415686, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.509804, 0.454902, 1)
+anti_aliasing = false
+
+[sub_resource type="Gradient" id="Gradient_jsjkw"]
+offsets = PackedFloat32Array(0.00719424, 0.5, 1)
+colors = PackedColorArray(0.0745098, 0.00784314, 0.0313726, 0, 0.0745098, 0.00784314, 0.0313726, 1, 0.0745098, 0.00784314, 0.0313726, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dwv4g"]
+gradient = SubResource("Gradient_jsjkw")
+width = 1366
+height = 768
+fill_from = Vector2(0.5, 1)
+fill_to = Vector2(0.5, 0)
+
+[node name="Player" groups=["player"] instance=ExtResource("1_2g2g3")]
+collision_layer = 1
+collision_mask = 190
+script = ExtResource("2_nd0rh")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_u630a")
+
+[node name="Espada" parent="." index="3"]
+collision_layer = 1
+collision_mask = 4
+
+[node name="Camera2DPlus" type="Camera2D" parent="." index="4"]
+zoom = Vector2(0.6, 0.6)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+script = ExtResource("4_d4hm8")
+NODE_TO_FOLLOW_PATH = NodePath("../LookPoint")
+FOLLOW_OFFSET = Vector2(100, 0)
+SHAKE_DECAY = 0.06
+SHAKE_POSITION_MULTIPLIER = 1.5
+FLASH_LAYER = 11
+
+[node name="LookPoint" type="Marker2D" parent="." index="5"]
+position = Vector2(400, 0)
+
+[node name="Arcabuz" type="Node2D" parent="." index="6"]
+script = ExtResource("5_qkgco")
+bullet = ExtResource("6_i0lj8")
+NBS = 5
+Angle_Variance = 10
+Firing_Arc = 15
+Spawn_Point = Vector2(20, -28)
+
+[node name="ArcabuzSprite" type="Sprite2D" parent="Arcabuz" index="0"]
+texture = ExtResource("6_2uwmv")
+
+[node name="ReloadTimer" type="Timer" parent="Arcabuz" index="1"]
+wait_time = 2.5
+one_shot = true
+
+[node name="HUD" type="CanvasLayer" parent="." index="7"]
+
+[node name="TextureRect" type="TextureRect" parent="HUD" index="0"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -128.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_y7ewc")
+expand_mode = 1
+flip_h = true
+flip_v = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD" index="1"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="HBox" type="HBoxContainer" parent="HUD/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="LadoEsquerdo" type="VBoxContainer" parent="HUD/MarginContainer/HBox" index="0"]
+layout_mode = 2
+size_flags_horizontal = 0
+alignment = 2
+
+[node name="Bullets" type="Label" parent="HUD/MarginContainer/HBox/LadoEsquerdo" index="0"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_outline_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("8_nx68v")
+theme_override_font_sizes/font_size = 50
+text = "5"
+
+[node name="Mosquete" type="TextureRect" parent="HUD/MarginContainer/HBox/LadoEsquerdo" index="1"]
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+texture = ExtResource("9_b1527")
+expand_mode = 1
+
+[node name="ReloadBar" type="ProgressBar" parent="HUD/MarginContainer/HBox/LadoEsquerdo" index="2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_q6mgd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_a01x5")
+max_value = 5.0
+value = 3.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="LadoDIreito" type="VBoxContainer" parent="HUD/MarginContainer/HBox" index="1"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD" index="2"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Fundo" type="TextureRect" parent="HUD/CenterContainer" index="0"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_dwv4g")
+
+[node name="Label" type="Label" parent="HUD/CenterContainer" index="1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_colors/font_shadow_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+theme_override_font_sizes/font_size = 50
+text = "Pressione 'R' para tentar novamente."
+
+[connection signal="gun_ready" from="Arcabuz" to="." method="_on_arcabuz_gun_ready"]
+[connection signal="timeout" from="Arcabuz/ReloadTimer" to="Arcabuz" method="_on_reload_timer_timeout"]

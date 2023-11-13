@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://linddmnccagp"]
+
+[ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_0vwlg"]
+[ext_resource type="Script" path="res://Scenes/Stages/Map01.gd" id="1_jrtfk"]
+[ext_resource type="PackedScene" uid="uid://fkvc5jifrg33" path="res://Scenes/Dialog/cap_2_prologo.tscn" id="2_agj71"]
+[ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="2_m3hpg"]
+[ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="3_e4lu1"]
+[ext_resource type="Script" path="res://Scenes/Stages/EnemySpawn.gd" id="6_ago4d"]
+
+[node name="Forte" type="Node2D"]
+script = ExtResource("1_jrtfk")
+nextScene = ExtResource("2_agj71")
+
+[node name="EnemySpawn" type="Node" parent="."]
+script = ExtResource("6_ago4d")
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawn"]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[node name="SpawnPoints" type="Node" parent="EnemySpawn"]
+
+[node name="Spawn01" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
+position = Vector2(5876, -978)
+
+[node name="Spawn02" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
+position = Vector2(6038, 716)
+
+[node name="ReachPoints" type="Node" parent="EnemySpawn"]
+
+[node name="Reach01" type="Marker2D" parent="EnemySpawn/ReachPoints"]
+position = Vector2(2587, -706)
+
+[node name="Reach02" type="Marker2D" parent="EnemySpawn/ReachPoints"]
+position = Vector2(2490, 393)
+
+[node name="Enemies" type="Node" parent="EnemySpawn"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_0vwlg")]
+layer_0/name = "Forte"
+layer_0/z_index = -2
+
+[node name="Ally" parent="." instance=ExtResource("3_e4lu1")]
+position = Vector2(2267, -501)
+
+[node name="Player" parent="." instance=ExtResource("2_m3hpg")]
+position = Vector2(2555, -60)
+
+[connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]
+[connection signal="timeout" from="EnemySpawn/SpawnTimer" to="EnemySpawn" method="_on_spawn_timer_timeout"]

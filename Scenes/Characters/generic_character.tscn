@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://ixb44jte5b2g"]
+
+[ext_resource type="Script" path="res://Code/Characters/generic_character.gd" id="1_01tre"]
+[ext_resource type="Script" path="res://Code/Misc/Espada.gd" id="2_508ma"]
+[ext_resource type="Texture2D" uid="uid://pvwwcxywe616" path="res://Assets/Sprites/Characters/General/espada.png" id="3_6bf0j"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7f7f2"]
+radius = 21.0
+height = 80.0
+
+[sub_resource type="Animation" id="Animation_g5fja"]
+resource_name = "EspadaSwing"
+length = 0.7
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Espada:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0499524, 0.26, 0.68),
+"transitions": PackedFloat32Array(1, 0.574349, 0.840897, 0.258816),
+"update": 0,
+"values": [0.0, -2.0944, 1.39626, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Espada/EspadaColision:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kbxeo"]
+_data = {
+"EspadaSwing": SubResource("Animation_g5fja")
+}
+
+[node name="GenericCharacter" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_01tre")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="BodyColision" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_7f7f2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kbxeo")
+}
+
+[node name="Espada" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_508ma")
+
+[node name="EspadaSprite" type="Sprite2D" parent="Espada"]
+texture = ExtResource("3_6bf0j")
+
+[node name="EspadaColision" type="CollisionPolygon2D" parent="Espada"]
+rotation = -1.39626
+polygon = PackedVector2Array(-29.7203, 21.4873, -34.6443, 22.3556, -35.1677, 36.6638, -26.8872, 60.5894, -12.177, 86.4275, -0.0120173, 86.3134, -1.11099, 74.322, -18.6591, 43.9072, -27.2297, 24.0944)
+disabled = true
+
+[connection signal="body_entered" from="Espada" to="." method="_on_espada_body_entered"]

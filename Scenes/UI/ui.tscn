@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgjt0jrres4xf"]
+
+[ext_resource type="Texture2D" uid="uid://pwk4sgqni1ib" path="res://Assets/Sprites/UI/mosquete.png" id="1_akph6"]
+
+[sub_resource type="Theme" id="Theme_yujol"]
+Label/colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+Label/colors/font_outline_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+Label/constants/outline_size = 3
+Label/font_sizes/font_size = 80
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abpc3"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.835294, 0.235294, 0.415686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f68c4"]
+bg_color = Color(0.835294, 0.235294, 0.415686, 1)
+
+[sub_resource type="Theme" id="Theme_vbwtf"]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_abpc3")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_f68c4")
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="Background" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_yujol")
+text = "5"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture = ExtResource("1_akph6")
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_vbwtf")
+max_value = 2.5
+value = 2.0
+show_percentage = false

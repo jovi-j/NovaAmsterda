@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3k1fuo42m3st"]
+
+[ext_resource type="PackedScene" uid="uid://ixb44jte5b2g" path="res://Scenes/Characters/generic_character.tscn" id="1_o2hs4"]
+[ext_resource type="Script" path="res://Code/Characters/NPC/npc.gd" id="2_mxisf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t35ss"]
+radius = 1000.0
+
+[node name="NPC" instance=ExtResource("1_o2hs4")]
+script = ExtResource("2_mxisf")
+
+[node name="EspadaColision" parent="Espada" index="1"]
+disabled = false
+
+[node name="HearingArea" type="Area2D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HearingArea" index="0"]
+shape = SubResource("CircleShape2D_t35ss")
+
+[node name="VisionArea" type="Area2D" parent="." index="5"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionArea" index="0"]
+polygon = PackedVector2Array(-28, 43, 0, 69, 27, 86, 784, 608, 1019, -2, 869, -497, 17, -76, -4, -69, -21, -40, -31, -3)
+
+[node name="PreAttackArea" type="Area2D" parent="." index="6"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PreAttackArea" index="0"]
+polygon = PackedVector2Array(0, -41, -1, -91, 62, -87, 108, 33, 8, 97, -12, 83, -11, 26)
+
+[node name="ReactionTimer" type="Timer" parent="." index="7"]
+wait_time = 0.2
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="8"]
+
+[node name="NavTimer" type="Timer" parent="." index="9"]
+wait_time = 0.2
+
+[connection signal="body_entered" from="PreAttackArea" to="." method="_on_pre_attack_area_body_entered"]
+[connection signal="timeout" from="ReactionTimer" to="." method="_on_reaction_timer_timeout"]
+[connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]

@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd5jd6af5mt2p"]
+
+[ext_resource type="PackedScene" uid="uid://d3k1fuo42m3st" path="res://Scenes/Characters/NPC/npc.tscn" id="1_yjrrk"]
+[ext_resource type="Script" path="res://Code/Characters/NPC/Enemy/enemy.gd" id="2_0x2kc"]
+[ext_resource type="Texture2D" uid="uid://d4hos7jn63lb4" path="res://Assets/Sprites/Characters/NPC/Enemy/enemy.png" id="2_h0jmp"]
+
+[node name="Enemy" groups=["enemies"] instance=ExtResource("1_yjrrk")]
+collision_layer = 4
+collision_mask = 95
+script = ExtResource("2_0x2kc")
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_h0jmp")
+
+[node name="Espada" parent="." index="3"]
+collision_mask = 3
+
+[node name="HearingArea" parent="." index="4"]
+collision_mask = 3
+
+[node name="VisionArea" parent="." index="5"]
+collision_layer = 4
+collision_mask = 3
+
+[node name="PreAttackArea" parent="." index="6"]
+collision_mask = 3
+
+[connection signal="body_entered" from="HearingArea" to="." method="_on_hearing_area_body_entered"]
+[connection signal="body_exited" from="HearingArea" to="." method="_on_hearing_area_body_exited"]
+[connection signal="body_entered" from="VisionArea" to="." method="_on_vision_area_body_entered"]
+[connection signal="body_exited" from="VisionArea" to="." method="_on_vision_area_body_exited"]

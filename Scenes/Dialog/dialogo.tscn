@@ -1,0 +1,228 @@
+[gd_scene load_steps=10 format=3 uid="uid://cj6wd2v8fti36"]
+
+[ext_resource type="Texture2D" uid="uid://cjogeblnh0m4v" path="res://Assets/Sprites/Dialog/dialogpatch.png" id="1_bd3qb"]
+[ext_resource type="Texture2D" uid="uid://dt2xvl1m2gv8y" path="res://Assets/Sprites/Dialog/comandante.png" id="2_b6dxj"]
+[ext_resource type="PackedScene" uid="uid://dbqyy8261eg2f" path="res://Scenes/Dialog/mostra_controles.tscn" id="2_o53nh"]
+[ext_resource type="Texture2D" uid="uid://bg2ym571sftms" path="res://Assets/Sprites/Dialog/soldado1.png" id="3_gkdcy"]
+
+[sub_resource type="GDScript" id="GDScript_6p1nd"]
+script/source = "extends Control
+
+@onready var fotoPessoaTextureRect : TextureRect = $NinePatchRect/MarginContainer/HBoxContainer/VBoxContainer/FotoPessoa
+@onready var textoTela : RichTextLabel = $NinePatchRect/MarginContainer/HBoxContainer/MarginContainer/Texto
+@onready var tituloPessoa : Label = $NinePatchRect/MarginContainer/HBoxContainer/VBoxContainer/NomePessoa
+@export var nextScene : PackedScene
+
+@export var fotos : Array
+
+#fotos
+enum {
+	CAP=0,
+	SL1=1,
+	SL2=2
+}
+
+
+var can_go_to_next : bool = true
+
+var dialogos = [
+		Dialogo.new(CAP, \"Rápido! Os holandeses estão atacando Natal, temos que defender o Forte. Avante!!! \", \"Capitão Mor Gouveia\"),
+	 	Dialogo.new(SL1, \"E os indígenas se aliaram a Keulen. Não sei se temos forças suficientes para enfrentá-los…\", \"Soldado\"),
+		Dialogo.new(CAP, \"Se assim for, então esta é a hora de lutar e morrer em nome do seu rei, soldado. TODOS A POSTOS!!!\", \"Capitão Mor Gouveia\") 
+	]
+
+var curr_dialogo = 0
+
+
+func _ready():
+	$AnimationPlayer.play(\"intro\")
+	
+func _input(_event):
+	if Input.is_action_just_pressed(\"interact\") or Input.is_action_just_pressed(\"ui_accept\") or Input.is_action_just_pressed(\"primary\"):
+		if $AnimationPlayer.is_playing():
+			$AnimationPlayer.advance(10)
+		else:
+			curr_dialogo += 1
+			playDialogos()
+		
+
+func playDialogos():
+	if curr_dialogo >= dialogos.size():
+		get_tree().change_scene_to_packed(nextScene)
+		return
+	playText(dialogos[curr_dialogo].foto, dialogos[curr_dialogo].texto, dialogos[curr_dialogo].titulo)
+
+	
+func playText(fotoPessoa : int, texto: String, titulo : String):
+	textoTela.text = texto
+	fotoPessoaTextureRect.texture = fotos[fotoPessoa]
+	tituloPessoa.text = titulo
+	$AnimationPlayer.play(\"new_animation\")
+"
+
+[sub_resource type="Animation" id="Animation_ylebc"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_81a7m"]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../../../..:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.0001),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playDialogos"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xvmbr"]
+resource_name = "new_animation"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../../../..:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mfrc4"]
+_data = {
+"RESET": SubResource("Animation_ylebc"),
+"intro": SubResource("Animation_81a7m"),
+"new_animation": SubResource("Animation_xvmbr")
+}
+
+[node name="Cutscene_1" type="Control"]
+layout_mode = 3
+anchor_left = 0.156
+anchor_top = 0.537
+anchor_right = 0.843
+anchor_bottom = 0.845
+offset_left = -213.096
+offset_top = -412.416
+offset_right = 214.462
+offset_bottom = 119.04
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_6p1nd")
+nextScene = ExtResource("2_o53nh")
+fotos = [ExtResource("2_b6dxj"), ExtResource("3_gkdcy")]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 210.0
+offset_top = -353.0
+offset_right = -209.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_bd3qb")
+region_rect = Rect2(0, 0, 64, 64)
+patch_margin_left = 10
+patch_margin_top = 15
+patch_margin_right = 10
+patch_margin_bottom = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="FotoPessoa" type="TextureRect" parent="NinePatchRect/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_b6dxj")
+stretch_mode = 3
+
+[node name="NomePessoa" type="Label" parent="NinePatchRect/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_outline_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_font_sizes/font_size = 32
+text = "Capitão Mor Gouveia"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="Texto" type="RichTextLabel" parent="NinePatchRect/MarginContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_outline_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+scroll_active = false
+autowrap_mode = 2
+shortcut_keys_enabled = false
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../NinePatchRect/MarginContainer/HBoxContainer/MarginContainer/Texto")
+autoplay = "intro"
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_mfrc4")
+}
