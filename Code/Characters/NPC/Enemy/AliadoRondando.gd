@@ -1,19 +1,10 @@
-extends GenericCharacter
+extends Enemy
 
-signal making_noise
-signal is_dead
 
-@onready var nav : NavigationAgent2D = $NavigationAgent2D
-@onready var espada : Area2D = $Espada
-@onready var hearingArea : Area2D = $HearingArea
-@onready var visionArea : Area2D = $VisionArea
-@onready var preAttackArea : Area2D = $PreAttackArea
-@onready var animPlayer : AnimationPlayer = $AnimationPlayer
-@onready var target : CharacterBody2D
+@export var reachPoints : Array[Marker2D]
+var curr_point = 0
 
-@onready var reactionTimer : Timer = $ReactionTimer
-
-@export var reachPoint : Marker2D
+@onready var nextPointTimer : Timer = $NextPointTimer
 
 func remove_colisions():
 	animPlayer.call_deferred('stop')
@@ -27,6 +18,7 @@ func remove_colisions():
 	call_deferred('set_collision_mask_value', 1,false)
 	call_deferred('set_collision_mask_value', 7,false)
 	$NavTimer.stop()
+	nextPointTimer.stop()
 
 func hit():
 	dead = true
@@ -36,14 +28,17 @@ func hit():
 
 func _ready():
 	randomize()
-	reactionTimer.wait_time = randf_range(0.19,0.29)
-	if reachPoint != null:
-		make_path(reachPoint.global_position)
+	reactionTimer.wait_time = 0.01
+	make_path(reachPoints[curr_point].global_position)
+	
 		
 func _physics_process(_delta):
 	if not dead:
 		if nav.is_navigation_finished():
-			return
+			if target == null and nextPointTimer.is_stopped():
+				nextPointTimer.start()
+			else:
+				return
 		if not reactionTimer.is_stopped():
 			return
 		var enemy_pos: Vector2 = global_position
@@ -54,6 +49,12 @@ func _physics_process(_delta):
 		new_vel = new_vel * speed
 		velocity = new_vel
 		move_and_slide()
+		
+func inc_curr_point():
+	if curr_point+1 >= reachPoints.size():
+		curr_point = 0
+	else:
+		curr_point += 1
 
 func make_path(target_location):
 	nav.target_position = target_location
@@ -64,7 +65,27 @@ func _on_reaction_timer_timeout():
 func _on_pre_attack_area_body_entered(_body):
 	$ReactionTimer.start()
 
-
 func _on_nav_timer_timeout():
-	if target != null:
+	if target != null and is_target_visible(target):
 		make_path(target.global_position)
+		target.hit()
+		
+func _on_next_point_timer_timeout():
+	if target == null:
+		inc_curr_point()
+		make_path(reachPoints[curr_point].global_position)
+		
+func _on_vision_area_body_entered(body):
+	if body.is_in_group("player") or body.is_in_group("alies") and target == null:
+		target = body
+		$NavTimer.start()
+		
+func is_target_visible(target: Node2D):
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsRayQueryParameters2D.create(global_position, target.global_position)
+	query.exclude = [self]
+	var result = space_state.intersect_ray(query)
+	if result != null and result.collider.is_in_group("player"):
+		return true
+	return false
+

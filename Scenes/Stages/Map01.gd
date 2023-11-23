@@ -1,7 +1,7 @@
 extends Node2D
 
 
-@onready var n_of_enemies : int = 2
+@export var n_of_enemies = 2
 
 @export var nextScene : PackedScene
 

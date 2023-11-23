@@ -47,6 +47,7 @@ fill_to = Vector2(0.5, 0)
 collision_layer = 1
 collision_mask = 190
 script = ExtResource("2_nd0rh")
+objetivoText = ""
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("3_u630a")
@@ -146,6 +147,24 @@ metadata/_edit_use_anchors_ = true
 
 [node name="LadoDIreito" type="VBoxContainer" parent="HUD/MarginContainer/HBox" index="1"]
 layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 0
+
+[node name="Objetivo" type="Label" parent="HUD/MarginContainer/HBox/LadoDIreito" index="0"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_outline_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Objetivo:"
+
+[node name="ObjText" type="Label" parent="HUD/MarginContainer/HBox/LadoDIreito" index="1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_outline_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 30
+text = "Defenda o forte matando os holandeses."
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD" index="2"]
 visible = false

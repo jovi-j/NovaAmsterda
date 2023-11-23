@@ -9,13 +9,15 @@
 
 [node name="Forte" type="Node2D"]
 script = ExtResource("1_jrtfk")
+n_of_enemies = 5
 nextScene = ExtResource("2_agj71")
 
 [node name="EnemySpawn" type="Node" parent="."]
 script = ExtResource("6_ago4d")
+n_of_enemies = 10
 
 [node name="SpawnTimer" type="Timer" parent="EnemySpawn"]
-wait_time = 0.2
+wait_time = 5.0
 one_shot = true
 autostart = true
 
@@ -46,6 +48,7 @@ position = Vector2(2267, -501)
 
 [node name="Player" parent="." instance=ExtResource("2_m3hpg")]
 position = Vector2(2555, -60)
+objetivoText = "Defenda o forte matando os holandeses."
 
 [connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]
 [connection signal="timeout" from="EnemySpawn/SpawnTimer" to="EnemySpawn" method="_on_spawn_timer_timeout"]

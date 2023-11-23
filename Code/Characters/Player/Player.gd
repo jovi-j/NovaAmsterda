@@ -8,12 +8,17 @@ signal is_dead
 @onready var camera : Camera2DPlus = $Camera2DPlus
 @onready var reloadBar : ProgressBar = %ReloadBar
 @onready var bulletLabel : Label = $HUD/MarginContainer/HBox/LadoEsquerdo/Bullets
+@export var objetivoText : String
 
+
+func set_objetivo_text(text):
+	$HUD/MarginContainer/HBox/LadoDIreito/ObjText.text = text
 
 func _ready():
 	reloadBar.max_value = reloadTimer.wait_time
 	reloadBar.value = 0.0
 	reloadBar.self_modulate = Color(Color.WHITE, 0.0)
+	set_objetivo_text(objetivoText)
 	
 	
 func hit():
