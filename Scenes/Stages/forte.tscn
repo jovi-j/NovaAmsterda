@@ -9,7 +9,6 @@
 
 [node name="Forte" type="Node2D"]
 script = ExtResource("1_jrtfk")
-n_of_enemies = 5
 nextScene = ExtResource("2_agj71")
 
 [node name="EnemySpawn" type="Node" parent="."]
@@ -24,18 +23,18 @@ autostart = true
 [node name="SpawnPoints" type="Node" parent="EnemySpawn"]
 
 [node name="Spawn01" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
-position = Vector2(5876, -978)
+position = Vector2(5975, -828)
 
 [node name="Spawn02" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
-position = Vector2(6038, 716)
+position = Vector2(5885, 556)
 
 [node name="ReachPoints" type="Node" parent="EnemySpawn"]
 
 [node name="Reach01" type="Marker2D" parent="EnemySpawn/ReachPoints"]
-position = Vector2(2587, -706)
+position = Vector2(3111, -859)
 
 [node name="Reach02" type="Marker2D" parent="EnemySpawn/ReachPoints"]
-position = Vector2(2490, 393)
+position = Vector2(3124, 575)
 
 [node name="Enemies" type="Node" parent="EnemySpawn"]
 
@@ -47,7 +46,7 @@ layer_0/z_index = -2
 position = Vector2(2267, -501)
 
 [node name="Player" parent="." instance=ExtResource("2_m3hpg")]
-position = Vector2(2555, -60)
+position = Vector2(2249, 1)
 objetivoText = "Defenda o forte matando os holandeses."
 
 [connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]

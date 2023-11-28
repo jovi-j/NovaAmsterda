@@ -1,0 +1,192 @@
+[gd_scene load_steps=15 format=3 uid="uid://cdkcw24xl7vi2"]
+
+[ext_resource type="Script" path="res://Code/Dialog/cutscene_3.gd" id="1_5uoel"]
+[ext_resource type="FontFile" uid="uid://ct7amco1fsj62" path="res://Assets/Fonts/AncientModernTales.ttf" id="2_gvorr"]
+[ext_resource type="Texture2D" uid="uid://cmrmhes1pwv0y" path="res://Assets/Sprites/Dialog/bandeira.png" id="3_rdjja"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3is3l"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2kny"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7waq"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t286g"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxphd"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bkmcg"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01j80"]
+atlas = ExtResource("3_rdjja")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ro4wk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3is3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2kny")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7waq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t286g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxphd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bkmcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_01j80")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="Animation" id="Animation_3fj83"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_117ic"]
+resource_name = "Text"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4.8, 5.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../..")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"goto_next"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rstvp"]
+_data = {
+"RESET": SubResource("Animation_3fj83"),
+"Text": SubResource("Animation_117ic")
+}
+
+[node name="cutscene_3" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5uoel")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="CenterContainer"]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CenterContainer/Control"]
+position = Vector2(4, -180)
+scale = Vector2(1.825, 1.825)
+sprite_frames = SubResource("SpriteFrames_ro4wk")
+autoplay = "default"
+frame_progress = 0.235046
+
+[node name="Label" type="Label" parent="CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_fonts/font = ExtResource("2_gvorr")
+theme_override_font_sizes/font_size = 50
+text = "Os soldados portugueses se renderam."
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CenterContainer/Label")
+libraries = {
+"": SubResource("AnimationLibrary_rstvp")
+}

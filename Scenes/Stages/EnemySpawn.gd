@@ -19,8 +19,9 @@ func spawn_enemy():
 	if n_of_enemies <= 0:
 		return
 	var inst_enemy = enemy.instantiate()
-	inst_enemy.reachPoint = reachPoints.pick_random()
-	inst_enemy.global_position = spawnPoints.pick_random().global_position
+	var num = randi_range(0,spawnPoints.size()-1)
+	inst_enemy.reachPoint = reachPoints[num]
+	inst_enemy.global_position = spawnPoints[num].global_position
 	$Enemies.add_child(inst_enemy)
 	emit_signal("enemy_spawned", inst_enemy)
 	spawnTimer.start()
