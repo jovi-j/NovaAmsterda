@@ -1,11 +1,6 @@
 extends "res://Code/Characters/NPC/npc.gd"
 class_name Enemy
 
-func hit():
-	dead = true
-	emit_signal("is_dead")
-	$Sprite.texture = load("res://Assets/Sprites/Characters/NPC/Enemy/enemy_death.png")
-	remove_colisions()
 
 # areas
 func _on_hearing_area_body_entered(body):

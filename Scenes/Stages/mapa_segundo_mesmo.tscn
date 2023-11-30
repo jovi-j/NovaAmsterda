@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://chyw7n01ldit2"]
+
+[ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_ykrvb"]
+[ext_resource type="Script" path="res://Code/Misc/CannonballSpawner.gd" id="2_orrks"]
+[ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="4_esk6h"]
+[ext_resource type="PackedScene" uid="uid://bd5jd6af5mt2p" path="res://Scenes/Characters/NPC/Enemy/enemy.tscn" id="5_mn0l4"]
+[ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="6_c1ens"]
+
+[node name="Mapa02" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_ykrvb")]
+
+[node name="CannonSpawnLocations" type="Node" parent="."]
+script = ExtResource("2_orrks")
+
+[node name="L1" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(2564, -756)
+
+[node name="L2" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(2188, -212)
+
+[node name="L3" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(1980, 204)
+
+[node name="L4" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(2512, 468)
+
+[node name="L5" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(2800, -172)
+
+[node name="L6" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(3404, -832)
+
+[node name="L7" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(3428, 556)
+
+[node name="L8" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(4277, 524)
+
+[node name="L9" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(4144, -848)
+
+[node name="L10" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(4843, -832)
+
+[node name="L11" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(5745, -928)
+
+[node name="L12" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(5403, -426)
+
+[node name="L13" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(5755, 2)
+
+[node name="L14" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(5413, 338)
+
+[node name="L15" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(5926, 632)
+
+[node name="L16" type="Marker2D" parent="CannonSpawnLocations"]
+position = Vector2(4837, 531)
+
+[node name="Timer" type="Timer" parent="CannonSpawnLocations"]
+autostart = true
+
+[node name="Ally" parent="." instance=ExtResource("6_c1ens")]
+position = Vector2(2434, -277)
+rotation = 3.0613
+
+[node name="Enemy" parent="." instance=ExtResource("5_mn0l4")]
+position = Vector2(2560, -352)
+
+[node name="Player" parent="." instance=ExtResource("4_esk6h")]
+position = Vector2(2714, 105)
+
+[connection signal="timeout" from="CannonSpawnLocations/Timer" to="CannonSpawnLocations" method="_on_timer_timeout"]

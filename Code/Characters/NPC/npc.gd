@@ -9,6 +9,7 @@ signal is_dead
 @onready var visionArea : Area2D = $VisionArea
 @onready var preAttackArea : Area2D = $PreAttackArea
 @onready var animPlayer : AnimationPlayer = $AnimationPlayer
+@onready var sprite : Sprite2D = $Sprite
 @onready var target : CharacterBody2D
 
 @onready var reactionTimer : Timer = $ReactionTimer
@@ -31,6 +32,8 @@ func remove_colisions():
 func hit():
 	dead = true
 	emit_signal("is_dead")
+	sprite.texture = load("res://Assets/Sprites/Characters/NPC/Enemy/enemy_death.png")
+	sprite.z_index = 0
 	remove_colisions()
 
 

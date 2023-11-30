@@ -8,6 +8,7 @@ signal is_dead
 @onready var camera : Camera2DPlus = $Camera2DPlus
 @onready var reloadBar : ProgressBar = %ReloadBar
 @onready var bulletLabel : Label = $HUD/MarginContainer/HBox/LadoEsquerdo/Bullets
+@onready var sprite : Sprite2D = $Sprite
 @export var objetivoText : String
 
 
@@ -25,6 +26,8 @@ func hit():
 	emit_signal("is_dead")
 	set_collision_layer_value(1, false)
 	$HUD/CenterContainer.visible = true
+	sprite.texture = load("res://Assets/Sprites/Characters/NPC/Enemy/enemy_death.png")
+	sprite.z_index = 0
 	dead = true
 	
 func _physics_process(_delta):
@@ -75,3 +78,7 @@ func restart_level():
 func _on_arcabuz_gun_ready():
 	reloadBar.self_modulate = Color(Color.WHITE, 0.0)
 	reloadBar.value = 0.0
+
+func disorient():
+	camera.add_shake(160)
+	camera.flash(Color(Color("d53c6a"), 1), 1)

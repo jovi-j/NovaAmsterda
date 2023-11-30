@@ -114,11 +114,12 @@ theme_override_colors/font_shadow_color = Color(1, 0.509804, 0.454902, 1)
 theme_override_fonts/font = ExtResource("1_2bml8")
 theme_override_font_sizes/font_size = 50
 text = "Nova Amsterdã, 12 de dezembro de 1633
-Castelo Ceullen."
+Castelo Ceullen"
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CenterContainer/Label")
+speed_scale = 0.8
 libraries = {
 "": SubResource("AnimationLibrary_rstvp")
 }

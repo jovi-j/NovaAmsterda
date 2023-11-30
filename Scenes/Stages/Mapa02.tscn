@@ -2083,7 +2083,7 @@ position = Vector2(99.5, -68.5)
 shape = SubResource("RectangleShape2D_pynch")
 
 [node name="Chave" type="Area2D" parent="."]
-position = Vector2(1633, 59)
+position = Vector2(2528, 780)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Chave"]
 shape = SubResource("CircleShape2D_8dryn")

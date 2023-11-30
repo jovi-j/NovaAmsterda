@@ -13,4 +13,4 @@ func _on_chave_body_entered(body):
 
 func _on_saida_body_entered(body):
 	if pegou_chave:
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file("res://Scenes/Dialog/cutscene_3.tscn")
