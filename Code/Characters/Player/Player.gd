@@ -20,6 +20,7 @@ func _ready():
 	reloadBar.value = 0.0
 	reloadBar.self_modulate = Color(Color.WHITE, 0.0)
 	set_objetivo_text(objetivoText)
+	$HUD/AnimationPlayer.play("objetivo_pisca")
 	
 	
 func hit():

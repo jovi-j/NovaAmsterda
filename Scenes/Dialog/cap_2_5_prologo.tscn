@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://fkvc5jifrg33"]
+[gd_scene load_steps=5 format=3 uid="uid://bb28sae163k2m"]
 
-[ext_resource type="Script" path="res://Code/Dialog/cap_2_prologo.gd" id="1_ce08a"]
+[ext_resource type="Script" path="res://Code/Dialog/cap_2_5_prologo.gd" id="1_ehbs6"]
 
 [sub_resource type="Animation" id="Animation_3fj83"]
 length = 0.001
@@ -96,7 +96,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ce08a")
+script = ExtResource("1_ehbs6")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -111,7 +111,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
 theme_override_colors/font_shadow_color = Color(1, 0.509804, 0.454902, 1)
 theme_override_font_sizes/font_size = 50
-text = "Natal, 11 de dezembro de 1633
+text = "Natal, 10 de dezembro de 1633
 Forte dos Reis Magos"
 horizontal_alignment = 1
 

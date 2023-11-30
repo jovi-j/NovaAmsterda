@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cqmcpt8qutle4"]
+[gd_scene load_steps=18 format=3 uid="uid://cqmcpt8qutle4"]
 
 [ext_resource type="PackedScene" uid="uid://ixb44jte5b2g" path="res://Scenes/Characters/generic_character.tscn" id="1_2g2g3"]
 [ext_resource type="Script" path="res://Code/Characters/Player/Player.gd" id="2_nd0rh"]
@@ -43,6 +43,26 @@ height = 768
 fill_from = Vector2(0.5, 1)
 fill_to = Vector2(0.5, 0)
 
+[sub_resource type="Animation" id="Animation_nvee0"]
+resource_name = "objetivo_pisca"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/HBox/LadoDIreito:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ktiuf"]
+_data = {
+"objetivo_pisca": SubResource("Animation_nvee0")
+}
+
 [node name="Player" groups=["player"] instance=ExtResource("1_2g2g3")]
 collision_layer = 1
 collision_mask = 190
@@ -55,6 +75,9 @@ texture = ExtResource("3_u630a")
 [node name="Espada" parent="." index="3"]
 collision_layer = 1
 collision_mask = 4
+
+[node name="EspadaColision" parent="Espada" index="1"]
+disabled = false
 
 [node name="Camera2DPlus" type="Camera2D" parent="." index="4"]
 zoom = Vector2(0.6, 0.6)
@@ -146,6 +169,7 @@ show_percentage = false
 metadata/_edit_use_anchors_ = true
 
 [node name="LadoDIreito" type="VBoxContainer" parent="HUD/MarginContainer/HBox" index="1"]
+modulate = Color(100, 100, 100, 1)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
@@ -184,6 +208,11 @@ theme_override_colors/font_color = Color(1, 0.509804, 0.454902, 1)
 theme_override_colors/font_shadow_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
 theme_override_font_sizes/font_size = 50
 text = "Pressione 'R' para tentar novamente."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD" index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_ktiuf")
+}
 
 [connection signal="gun_ready" from="Arcabuz" to="." method="_on_arcabuz_gun_ready"]
 [connection signal="timeout" from="Arcabuz/ReloadTimer" to="Arcabuz" method="_on_reload_timer_timeout"]

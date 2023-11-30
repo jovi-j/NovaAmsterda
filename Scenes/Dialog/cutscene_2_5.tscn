@@ -1,66 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dob43j70hrtm8"]
+[gd_scene load_steps=11 format=3 uid="uid://mc0kpasnhfij"]
 
-[ext_resource type="PackedScene" uid="uid://ccfw6oprl2ugv" path="res://Scenes/Stages/Mapa02.tscn" id="1_1q3g1"]
-[ext_resource type="Texture2D" uid="uid://dt2xvl1m2gv8y" path="res://Assets/Sprites/Dialog/comandante.png" id="3_12p4y"]
-[ext_resource type="Texture2D" uid="uid://bg2ym571sftms" path="res://Assets/Sprites/Dialog/soldado1.png" id="4_hrhe8"]
-[ext_resource type="Texture2D" uid="uid://dyb3yb1f265wu" path="res://Assets/Sprites/Dialog/soldado2.png" id="4_md1br"]
-[ext_resource type="Texture2D" uid="uid://cjogeblnh0m4v" path="res://Assets/Sprites/Dialog/dialogpatch.png" id="5_d4nq6"]
-[ext_resource type="Texture2D" uid="uid://cptlibwhggl6q" path="res://Assets/Sprites/Dialog/forte.jpg" id="5_t6lyj"]
-
-[sub_resource type="GDScript" id="GDScript_4cg6e"]
-script/source = "extends Control
-
-@onready var fotoPessoaTextureRect : TextureRect = $NinePatchRect/MarginContainer/HBoxContainer/VBoxContainer/FotoPessoa
-@onready var textoTela : RichTextLabel = $NinePatchRect/MarginContainer/HBoxContainer/MarginContainer/Texto
-@onready var tituloPessoa : Label = $NinePatchRect/MarginContainer/HBoxContainer/VBoxContainer/NomePessoa
-@export var nextScene : PackedScene
-
-@export var fotos : Array
-
-#fotos
-enum {
-	CAP=0,
-	SL1=1,
-	SL2=2
-}
-
-
-var can_go_to_next : bool = true
-
-var dialogos = [
-		Dialogo.new(SL1, \"Eu não sei vocês… mas eu não estou pronto para morrer. Não dessa forma\", \"Soldado A\"),
-		Dialogo.new(SL2, \"O Capitão está ferido. Agora estamos por nossa conta. O que devemos fazer?\", \"Soldado B\"),
-		Dialogo.new(SL1, \"…eu tenho uma ideia.\", \"Soldado A\")
-	]
-
-var curr_dialogo = 0
-
-
-func _ready():
-	$AnimationPlayer.play(\"intro\")
-	
-func _input(_event):
-	if Input.is_action_just_pressed(\"interact\") or Input.is_action_just_pressed(\"ui_accept\") or Input.is_action_just_pressed(\"primary\"):
-		if $AnimationPlayer.is_playing():
-			$AnimationPlayer.advance(10)
-		else:
-			curr_dialogo += 1
-			playDialogos()
-		
-
-func playDialogos():
-	if curr_dialogo >= dialogos.size():
-		get_tree().change_scene_to_packed(nextScene)
-		return
-	playText(dialogos[curr_dialogo].foto, dialogos[curr_dialogo].texto, dialogos[curr_dialogo].titulo)
-
-	
-func playText(fotoPessoa : int, texto: String, titulo : String):
-	textoTela.text = texto
-	fotoPessoaTextureRect.texture = fotos[fotoPessoa]
-	tituloPessoa.text = titulo
-	$AnimationPlayer.play(\"new_animation\")
-"
+[ext_resource type="PackedScene" uid="uid://chyw7n01ldit2" path="res://Scenes/Stages/mapa_segundo_mesmo.tscn" id="1_1kxu7"]
+[ext_resource type="Script" path="res://Code/Dialog/cutscene_2_5.gd" id="1_y0b1p"]
+[ext_resource type="Texture2D" uid="uid://dt2xvl1m2gv8y" path="res://Assets/Sprites/Dialog/comandante.png" id="2_x5h8i"]
+[ext_resource type="Texture2D" uid="uid://bg2ym571sftms" path="res://Assets/Sprites/Dialog/soldado1.png" id="3_4nves"]
+[ext_resource type="Texture2D" uid="uid://cptlibwhggl6q" path="res://Assets/Sprites/Dialog/forte.jpg" id="5_rbsjg"]
+[ext_resource type="Texture2D" uid="uid://cjogeblnh0m4v" path="res://Assets/Sprites/Dialog/dialogpatch.png" id="6_smkxx"]
 
 [sub_resource type="Animation" id="Animation_ylebc"]
 length = 0.001
@@ -129,7 +74,7 @@ _data = {
 "new_animation": SubResource("Animation_xvmbr")
 }
 
-[node name="Cutscene_2" type="Control"]
+[node name="Cutscene_2_5" type="Control"]
 layout_mode = 3
 anchor_left = 0.156
 anchor_top = 0.537
@@ -141,9 +86,9 @@ offset_right = 214.462
 offset_bottom = 119.04
 grow_horizontal = 2
 grow_vertical = 2
-script = SubResource("GDScript_4cg6e")
-nextScene = ExtResource("1_1q3g1")
-fotos = [ExtResource("3_12p4y"), ExtResource("4_hrhe8"), ExtResource("4_md1br")]
+script = ExtResource("1_y0b1p")
+nextScene = ExtResource("1_1kxu7")
+fotos = [ExtResource("2_x5h8i"), ExtResource("3_4nves")]
 
 [node name="Fundo" type="TextureRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.313726)
@@ -153,7 +98,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_t6lyj")
+texture = ExtResource("5_rbsjg")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -167,7 +112,7 @@ offset_right = -209.0
 offset_bottom = -113.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("5_d4nq6")
+texture = ExtResource("6_smkxx")
 region_rect = Rect2(0, 0, 64, 64)
 patch_margin_left = 10
 patch_margin_top = 15

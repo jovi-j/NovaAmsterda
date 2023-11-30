@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_0vwlg"]
 [ext_resource type="Script" path="res://Scenes/Stages/Map01.gd" id="1_jrtfk"]
-[ext_resource type="PackedScene" uid="uid://fkvc5jifrg33" path="res://Scenes/Dialog/cap_2_prologo.tscn" id="2_agj71"]
+[ext_resource type="PackedScene" uid="uid://bb28sae163k2m" path="res://Scenes/Dialog/cap_2_5_prologo.tscn" id="2_ldsgj"]
 [ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="2_m3hpg"]
 [ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="3_e4lu1"]
 [ext_resource type="Script" path="res://Scenes/Stages/EnemySpawn.gd" id="6_ago4d"]
 
 [node name="Forte" type="Node2D"]
 script = ExtResource("1_jrtfk")
-nextScene = ExtResource("2_agj71")
+nextScene = ExtResource("2_ldsgj")
 
 [node name="EnemySpawn" type="Node" parent="."]
 script = ExtResource("6_ago4d")

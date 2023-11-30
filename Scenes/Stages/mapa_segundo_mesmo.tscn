@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://chyw7n01ldit2"]
+[gd_scene load_steps=8 format=3 uid="uid://chyw7n01ldit2"]
 
+[ext_resource type="Script" path="res://Scenes/Stages/Map01.gd" id="1_hcb84"]
 [ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_ykrvb"]
 [ext_resource type="Script" path="res://Code/Misc/CannonballSpawner.gd" id="2_orrks"]
+[ext_resource type="PackedScene" uid="uid://fkvc5jifrg33" path="res://Scenes/Dialog/cap_2_prologo.tscn" id="2_pctev"]
 [ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="4_esk6h"]
-[ext_resource type="PackedScene" uid="uid://bd5jd6af5mt2p" path="res://Scenes/Characters/NPC/Enemy/enemy.tscn" id="5_mn0l4"]
 [ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="6_c1ens"]
+[ext_resource type="Script" path="res://Scenes/Stages/EnemySpawn.gd" id="7_3lvc3"]
 
 [node name="Mapa02" type="Node2D"]
+script = ExtResource("1_hcb84")
+nextScene = ExtResource("2_pctev")
 
 [node name="TileMap" parent="." instance=ExtResource("1_ykrvb")]
 
@@ -68,10 +72,37 @@ autostart = true
 position = Vector2(2434, -277)
 rotation = 3.0613
 
-[node name="Enemy" parent="." instance=ExtResource("5_mn0l4")]
-position = Vector2(2560, -352)
-
 [node name="Player" parent="." instance=ExtResource("4_esk6h")]
 position = Vector2(2714, 105)
+objetivoText = "Mate todos os holandeses."
+
+[node name="EnemySpawn" type="Node" parent="."]
+script = ExtResource("7_3lvc3")
+n_of_enemies = 10
+
+[node name="SpawnTimer" type="Timer" parent="EnemySpawn"]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="SpawnPoints" type="Node" parent="EnemySpawn"]
+
+[node name="Spawn01" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
+position = Vector2(5975, -828)
+
+[node name="Spawn02" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
+position = Vector2(5885, 556)
+
+[node name="ReachPoints" type="Node" parent="EnemySpawn"]
+
+[node name="Reach01" type="Marker2D" parent="EnemySpawn/ReachPoints"]
+position = Vector2(3111, -859)
+
+[node name="Reach02" type="Marker2D" parent="EnemySpawn/ReachPoints"]
+position = Vector2(3124, 575)
+
+[node name="Enemies" type="Node" parent="EnemySpawn"]
 
 [connection signal="timeout" from="CannonSpawnLocations/Timer" to="CannonSpawnLocations" method="_on_timer_timeout"]
+[connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]
+[connection signal="timeout" from="EnemySpawn/SpawnTimer" to="EnemySpawn" method="_on_spawn_timer_timeout"]
