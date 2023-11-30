@@ -2091,5 +2091,7 @@ shape = SubResource("CircleShape2D_8dryn")
 [node name="Sprite2D" type="Sprite2D" parent="Chave"]
 texture = ExtResource("14_ictpl")
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+
 [connection signal="body_entered" from="Saida" to="." method="_on_saida_body_entered"]
 [connection signal="body_entered" from="Chave" to="." method="_on_chave_body_entered"]

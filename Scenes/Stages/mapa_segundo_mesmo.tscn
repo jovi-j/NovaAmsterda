@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://chyw7n01ldit2"]
+[gd_scene load_steps=9 format=3 uid="uid://chyw7n01ldit2"]
 
 [ext_resource type="Script" path="res://Scenes/Stages/Map01.gd" id="1_hcb84"]
 [ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_ykrvb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="4_esk6h"]
 [ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="6_c1ens"]
 [ext_resource type="Script" path="res://Scenes/Stages/EnemySpawn.gd" id="7_3lvc3"]
+[ext_resource type="AudioStream" uid="uid://xpubnr7otkvu" path="res://Assets/Sound/Music/bucaneers.mp3" id="8_53keb"]
 
 [node name="Mapa02" type="Node2D"]
 script = ExtResource("1_hcb84")
@@ -102,6 +103,10 @@ position = Vector2(3111, -859)
 position = Vector2(3124, 575)
 
 [node name="Enemies" type="Node" parent="EnemySpawn"]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_53keb")
+volume_db = -21.0
 
 [connection signal="timeout" from="CannonSpawnLocations/Timer" to="CannonSpawnLocations" method="_on_timer_timeout"]
 [connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]

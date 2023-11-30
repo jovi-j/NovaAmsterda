@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://ixb44jte5b2g"]
+[gd_scene load_steps=12 format=3 uid="uid://ixb44jte5b2g"]
 
 [ext_resource type="Script" path="res://Code/Characters/generic_character.gd" id="1_01tre"]
 [ext_resource type="Script" path="res://Code/Misc/Espada.gd" id="2_508ma"]
 [ext_resource type="Texture2D" uid="uid://pvwwcxywe616" path="res://Assets/Sprites/Characters/General/espada.png" id="3_6bf0j"]
+[ext_resource type="AudioStream" uid="uid://bwb317w1kg85f" path="res://Assets/Sound/NPC/sword flesh.mp3" id="4_srt6d"]
+[ext_resource type="AudioStream" uid="uid://dklipefwq41dr" path="res://Assets/Sound/NPC/swoosh 1.mp3" id="5_nfvsx"]
+[ext_resource type="AudioStream" uid="uid://sqwwcw6kfgqa" path="res://Assets/Sound/NPC/swoosh 2.mp3" id="6_rk7i1"]
+[ext_resource type="AudioStream" uid="uid://ccj7b845sm1rq" path="res://Assets/Sound/NPC/swoosh 3.mp3" id="7_3b7nl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7f7f2"]
 radius = 21.0
@@ -36,11 +40,32 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EspadaSom:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbxeo"]
 _data = {
 "EspadaSwing": SubResource("Animation_g5fja")
 }
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tfriy"]
+streams_count = 3
+stream_0/stream = ExtResource("5_nfvsx")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("6_rk7i1")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("7_3b7nl")
+stream_2/weight = 1.0
 
 [node name="GenericCharacter" type="CharacterBody2D"]
 collision_layer = 0
@@ -71,5 +96,11 @@ texture = ExtResource("3_6bf0j")
 rotation = -1.39626
 polygon = PackedVector2Array(-29.7203, 21.4873, -34.6443, 22.3556, -35.1677, 36.6638, -26.8872, 60.5894, -12.177, 86.4275, -0.0120173, 86.3134, -1.11099, 74.322, -18.6591, 43.9072, -27.2297, 24.0944)
 disabled = true
+
+[node name="CarneSom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_srt6d")
+
+[node name="EspadaSom" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_tfriy")
 
 [connection signal="body_entered" from="Espada" to="." method="_on_espada_body_entered"]

@@ -10,9 +10,6 @@ func _ready():
 	$CPUParticles2D.emitting = false
 	$AnimationPlayer.play("Explosion")
 
-func _on_animated_sprite_2d_animation_finished():
-	queue_free()
-
 
 func _on_body_entered(body):
 	if body.has_method('hit'):
@@ -40,3 +37,7 @@ func _on_shake_area_body_exited(body):
 		bodies_in_shake_area.erase(body)
 		
 
+
+
+func _on_animation_player_animation_finished(_anim_name):
+	queue_free()

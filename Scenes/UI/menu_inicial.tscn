@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://wm8rtiflpj64"]
+
+[ext_resource type="Script" path="res://Code/Misc/menu_inicial.gd" id="1_pvnnm"]
+[ext_resource type="Texture2D" uid="uid://du4e7fcobt4kq" path="res://Assets/Sprites/Background/nova amsterda bandeira.png" id="1_xpfk3"]
+
+[node name="MenuInicial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pvnnm")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_font_sizes/font_size = 64
+text = "Nova Amsterdã"
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("1_xpfk3")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Iniciar jogo" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_hover_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_font_sizes/font_size = 64
+text = "Iniciar"
+
+[node name="Sair" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_hover_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_font_sizes/font_size = 64
+text = "Sair
+"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Iniciar jogo" to="." method="_on_iniciar_jogo_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Sair" to="." method="_on_sair_pressed"]

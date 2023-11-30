@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cqmcpt8qutle4"]
+[gd_scene load_steps=20 format=3 uid="uid://cqmcpt8qutle4"]
 
 [ext_resource type="PackedScene" uid="uid://ixb44jte5b2g" path="res://Scenes/Characters/generic_character.tscn" id="1_2g2g3"]
 [ext_resource type="Script" path="res://Code/Characters/Player/Player.gd" id="2_nd0rh"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://4vaexi8w83ua" path="res://Scenes/Misc/bullet.tscn" id="6_i0lj8"]
 [ext_resource type="FontFile" uid="uid://ct7amco1fsj62" path="res://Assets/Fonts/AncientModernTales.ttf" id="8_nx68v"]
 [ext_resource type="Texture2D" uid="uid://pwk4sgqni1ib" path="res://Assets/Sprites/UI/mosquete.png" id="9_b1527"]
+[ext_resource type="AudioStream" uid="uid://d2tlcmvlptmhq" path="res://Assets/Sound/Player/gunpow.mp3" id="10_47ana"]
 
 [sub_resource type="Gradient" id="Gradient_jcrhi"]
 offsets = PackedFloat32Array(0.670968, 1)
@@ -58,8 +59,61 @@ tracks/0/keys = {
 "values": [Color(100, 100, 100, 1), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_rwhjk"]
+resource_name = "objetivo_completo"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CenterContainer:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CenterContainer:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CenterContainer/Label:text")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Objetivo concluído!"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlackFade:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.4, 2.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.0745098, 0.00784314, 0.0313726, 0), Color(0.0745098, 0.00784314, 0.0313726, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ktiuf"]
 _data = {
+"objetivo_completo": SubResource("Animation_rwhjk"),
 "objetivo_pisca": SubResource("Animation_nvee0")
 }
 
@@ -191,7 +245,7 @@ theme_override_font_sizes/font_size = 30
 text = "Defenda o forte matando os holandeses."
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD" index="2"]
-visible = false
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -207,12 +261,24 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.509804, 0.454902, 1)
 theme_override_colors/font_shadow_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
 theme_override_font_sizes/font_size = 50
-text = "Pressione 'R' para tentar novamente."
+text = "Objetivo concluído!"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD" index="3"]
+[node name="BlackFade" type="ColorRect" parent="HUD" index="3"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 0.00784314, 0.0313726, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HUD" index="4"]
 libraries = {
 "": SubResource("AnimationLibrary_ktiuf")
 }
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="8"]
+stream = ExtResource("10_47ana")
+
 [connection signal="gun_ready" from="Arcabuz" to="." method="_on_arcabuz_gun_ready"]
 [connection signal="timeout" from="Arcabuz/ReloadTimer" to="Arcabuz" method="_on_reload_timer_timeout"]
+[connection signal="animation_finished" from="HUD/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

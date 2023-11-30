@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=3 uid="uid://bbxarbnaa00t5"]
+[gd_scene load_steps=84 format=3 uid="uid://bbxarbnaa00t5"]
 
 [ext_resource type="Texture2D" uid="uid://cf0ujp5wc2kru" path="res://Assets/Sprites/Background/Tiles/Forte/ParedeAgua/aguaesqcima.png" id="1_8w8mv"]
 [ext_resource type="Texture2D" uid="uid://ce65p7uxc3n31" path="res://Assets/Sprites/Background/Tiles/Forte/ParedeChao/walldirbaixo..png" id="2_pmey0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://d0bii53um23br" path="res://Assets/Sprites/Background/Tiles/Forte/ParedeAgua/aguaesqbaixo.png" id="10_akua5"]
 [ext_resource type="Texture2D" uid="uid://d061seq4e5tnk" path="res://Assets/Sprites/Background/Tiles/Forte/ParedeAgua/aguadircima.png" id="11_m0iuo"]
 [ext_resource type="Script" path="res://Code/Stages/TileMap.gd" id="12_5p6x1"]
+[ext_resource type="AudioStream" uid="uid://ckgskn48gbs1e" path="res://Assets/Sound/General/waves.wav" id="12_hpbym"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_tb3np"]
 tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 2, 196608, 0, 3, 262144, 0, 0, 327680, 0, 1, 393216, 0, 2, 458752, 0, 3, 524288, 0, 0, 589824, 0, 1, 655360, 0, 2, 720896, 0, 3, 786432, 0, 0, 851968, 0, 1, 917504, 0, 2, 983040, 0, 3)
@@ -2051,3 +2052,33 @@ script = ExtResource("12_5p6x1")
 position = Vector2(3864.75, 0.125008)
 scale = Vector2(1.48486, 0.786865)
 texture = SubResource("GradientTexture2D_lairt")
+
+[node name="Waves" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(4274, -1778)
+stream = ExtResource("12_hpbym")
+autoplay = true
+
+[node name="Waves2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(756, -747)
+stream = ExtResource("12_hpbym")
+autoplay = true
+
+[node name="Waves3" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1739, 1453)
+stream = ExtResource("12_hpbym")
+autoplay = true
+
+[node name="Waves4" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(5317, 1261)
+stream = ExtResource("12_hpbym")
+autoplay = true
+
+[node name="Waves5" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(6624, -123)
+stream = ExtResource("12_hpbym")
+autoplay = true
+
+[node name="Waves6" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(6624, -123)
+stream = ExtResource("12_hpbym")
+autoplay = true

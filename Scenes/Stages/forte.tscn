@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://linddmnccagp"]
+[gd_scene load_steps=8 format=3 uid="uid://linddmnccagp"]
 
 [ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_0vwlg"]
 [ext_resource type="Script" path="res://Scenes/Stages/Map01.gd" id="1_jrtfk"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="2_m3hpg"]
 [ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="3_e4lu1"]
 [ext_resource type="Script" path="res://Scenes/Stages/EnemySpawn.gd" id="6_ago4d"]
+[ext_resource type="AudioStream" uid="uid://xpubnr7otkvu" path="res://Assets/Sound/Music/bucaneers.mp3" id="7_12kks"]
 
 [node name="Forte" type="Node2D"]
 script = ExtResource("1_jrtfk")
@@ -48,6 +49,10 @@ position = Vector2(2267, -501)
 [node name="Player" parent="." instance=ExtResource("2_m3hpg")]
 position = Vector2(2249, 1)
 objetivoText = "Defenda o forte matando os holandeses."
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_12kks")
+volume_db = -21.0
 
 [connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]
 [connection signal="timeout" from="EnemySpawn/SpawnTimer" to="EnemySpawn" method="_on_spawn_timer_timeout"]

@@ -2,6 +2,7 @@ extends GenericCharacter
 class_name Player
 signal making_noise(position)
 signal is_dead
+signal announcer_finished
 
 @onready var arcabuz : Gun = $Arcabuz
 @onready var reloadTimer : Timer = $Arcabuz/ReloadTimer
@@ -51,8 +52,9 @@ func _input(_event):
 				camera.add_shake(10)
 				camera.flash(Color(Color("d53c6a"), 0.7), 0.1)
 				reloadBar.value = 0.0
+				$AudioStreamPlayer.play()
 				emit_signal("making_noise", global_position)
-		if Input.is_action_just_pressed("secondary"):
+		if Input.is_action_just_pressed("secondary") and not $AnimationPlayer.is_playing():
 			$Espada.use()
 		if Input.is_action_just_pressed("look"):
 			$LookPoint.position = Vector2(800,0)
@@ -73,9 +75,11 @@ func _input(_event):
 
 
 func restart_level():
-	get_tree().reload_current_scene()
+	get_parent().restart_level()
 
-
+func objective_annoucer():
+	$HUD/AnimationPlayer.play("objetivo_completo")
+	
 func _on_arcabuz_gun_ready():
 	reloadBar.self_modulate = Color(Color.WHITE, 0.0)
 	reloadBar.value = 0.0
@@ -83,3 +87,8 @@ func _on_arcabuz_gun_ready():
 func disorient():
 	camera.add_shake(160)
 	camera.flash(Color(Color("d53c6a"), 1), 1)
+
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "objetivo_completo":
+		emit_signal("announcer_finished")

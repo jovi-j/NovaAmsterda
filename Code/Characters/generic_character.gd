@@ -13,3 +13,4 @@ func hit():
 func _on_espada_body_entered(body):
 	if body.has_method("hit"):
 		body.hit()
+		$CarneSom.play()

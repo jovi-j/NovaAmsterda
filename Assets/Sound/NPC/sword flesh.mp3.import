@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bwb317w1kg85f"
+path="res://.godot/imported/sword flesh.mp3-40d4c2baec99e09afab6a74ceb99055a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/NPC/sword flesh.mp3"
+dest_files=["res://.godot/imported/sword flesh.mp3-40d4c2baec99e09afab6a74ceb99055a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
