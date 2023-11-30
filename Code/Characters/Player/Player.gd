@@ -28,7 +28,7 @@ func hit():
 	emit_signal("is_dead")
 	set_collision_layer_value(1, false)
 	$HUD/CenterContainer.visible = true
-	sprite.texture = load("res://Assets/Sprites/Characters/NPC/Enemy/enemy_death.png")
+	sprite.texture = load("res://Assets/Sprites/Characters/Player/player_death.png")
 	sprite.z_index = 0
 	dead = true
 	

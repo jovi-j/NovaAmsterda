@@ -130,9 +130,6 @@ texture = ExtResource("3_u630a")
 collision_layer = 1
 collision_mask = 4
 
-[node name="EspadaColision" parent="Espada" index="1"]
-disabled = false
-
 [node name="Camera2DPlus" type="Camera2D" parent="." index="4"]
 zoom = Vector2(0.6, 0.6)
 position_smoothing_enabled = true
@@ -245,7 +242,7 @@ theme_override_font_sizes/font_size = 30
 text = "Defenda o forte matando os holandeses."
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD" index="2"]
-modulate = Color(1, 1, 1, 0)
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -261,7 +258,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.509804, 0.454902, 1)
 theme_override_colors/font_shadow_color = Color(0.0745098, 0.00784314, 0.0313726, 1)
 theme_override_font_sizes/font_size = 50
-text = "Objetivo concluído!"
+text = "Pressione \"R\" para reiniciar."
 
 [node name="BlackFade" type="ColorRect" parent="HUD" index="3"]
 anchors_preset = 15

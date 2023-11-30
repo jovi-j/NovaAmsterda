@@ -27,15 +27,15 @@ autostart = true
 position = Vector2(5975, -828)
 
 [node name="Spawn02" type="Marker2D" parent="EnemySpawn/SpawnPoints"]
-position = Vector2(5885, 556)
+position = Vector2(6042, 575)
 
 [node name="ReachPoints" type="Node" parent="EnemySpawn"]
 
 [node name="Reach01" type="Marker2D" parent="EnemySpawn/ReachPoints"]
-position = Vector2(3111, -859)
+position = Vector2(2997, -828)
 
 [node name="Reach02" type="Marker2D" parent="EnemySpawn/ReachPoints"]
-position = Vector2(3124, 575)
+position = Vector2(2550, 439)
 
 [node name="Enemies" type="Node" parent="EnemySpawn"]
 
@@ -45,6 +45,17 @@ layer_0/z_index = -2
 
 [node name="Ally" parent="." instance=ExtResource("3_e4lu1")]
 position = Vector2(2267, -501)
+
+[node name="Ally2" parent="." instance=ExtResource("3_e4lu1")]
+position = Vector2(2318, 427)
+
+[node name="Ally3" parent="." instance=ExtResource("3_e4lu1")]
+position = Vector2(2538, -52)
+rotation = -0.773579
+
+[node name="Ally4" parent="." instance=ExtResource("3_e4lu1")]
+position = Vector2(2763, 287)
+rotation = 0.699926
 
 [node name="Player" parent="." instance=ExtResource("2_m3hpg")]
 position = Vector2(2249, 1)

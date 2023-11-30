@@ -83,6 +83,19 @@ tracks/3/keys = {
 "method": &"goto_next"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Nova Amsterdã, 12 de dezembro de 1633
+Castelo Ceullen"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rstvp"]
 _data = {
@@ -108,6 +121,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="CenterContainer"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
 theme_override_colors/font_shadow_color = Color(1, 0.509804, 0.454902, 1)

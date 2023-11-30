@@ -71,7 +71,19 @@ autostart = true
 
 [node name="Ally" parent="." instance=ExtResource("6_c1ens")]
 position = Vector2(2434, -277)
-rotation = 3.0613
+rotation = 5.59687
+
+[node name="Ally4" parent="." instance=ExtResource("6_c1ens")]
+position = Vector2(2850, -781)
+rotation = 6.26468
+
+[node name="Ally3" parent="." instance=ExtResource("6_c1ens")]
+position = Vector2(2234, 171)
+rotation = 6.76869
+
+[node name="Ally2" parent="." instance=ExtResource("6_c1ens")]
+position = Vector2(2498, 835)
+rotation = 5.60885
 
 [node name="Player" parent="." instance=ExtResource("4_esk6h")]
 position = Vector2(2714, 105)
