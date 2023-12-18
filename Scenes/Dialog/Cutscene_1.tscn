@@ -176,9 +176,9 @@ visible_characters = 0
 visible_ratio = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../NinePatchRect/MarginContainer/HBoxContainer/MarginContainer/Texto")
-autoplay = "intro"
 reset_on_save = false
+root_node = NodePath("../NinePatchRect/MarginContainer/HBoxContainer/MarginContainer/Texto")
 libraries = {
 "": SubResource("AnimationLibrary_mfrc4")
 }
+autoplay = "intro"

@@ -153,9 +153,9 @@ metadata/_snap_enabled = true
 [sub_resource type="Gradient" id="Gradient_bsjxe"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f2017"]
-streams_count = 2
 random_pitch = 1.4
 random_volume_offset_db = 6.98
+streams_count = 2
 stream_0/stream = ExtResource("11_47vi2")
 stream_0/weight = 1.0
 stream_1/stream = ExtResource("12_pfdj7")

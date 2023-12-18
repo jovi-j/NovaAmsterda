@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://d4hos7jn63lb4" path="res://Assets/Sprites/Characters/NPC/Enemy/enemy.png" id="2_h0jmp"]
 
 [node name="Enemy" groups=["enemies"] instance=ExtResource("1_yjrrk")]
+z_index = 998
+z_as_relative = false
 collision_layer = 4
 collision_mask = 95
 script = ExtResource("2_0x2kc")
@@ -24,10 +26,6 @@ collision_mask = 3
 
 [node name="PreAttackArea" parent="." index="6"]
 collision_mask = 3
-
-[node name="NavigationAgent2D" parent="." index="8"]
-path_desired_distance = 15.0
-path_max_distance = 80.0
 
 [connection signal="body_entered" from="HearingArea" to="." method="_on_hearing_area_body_entered"]
 [connection signal="body_exited" from="HearingArea" to="." method="_on_hearing_area_body_exited"]

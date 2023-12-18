@@ -51,7 +51,7 @@ func _physics_process(_delta):
 			return
 		var enemy_pos: Vector2 = global_position
 		var next_path_pos = nav.get_next_path_position()
-		look_at(next_path_pos)
+		smooth_look(next_path_pos)
 		var new_vel = next_path_pos - enemy_pos
 		new_vel = new_vel.normalized()
 		new_vel = new_vel * speed
@@ -67,6 +67,11 @@ func _on_reaction_timer_timeout():
 func _on_pre_attack_area_body_entered(_body):
 	$ReactionTimer.start()
 
+func smooth_look(looking_position: Vector2):
+	var v = looking_position - global_position
+	var angle = v.angle()
+	var r = global_rotation
+	global_rotation = lerp_angle(r, angle, 0.5)
 
 func _on_nav_timer_timeout():
 	if target != null:
