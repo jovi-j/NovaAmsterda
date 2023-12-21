@@ -9,6 +9,7 @@ func _ready():
 func _on_chave_body_entered(body):
 	$Chave/Sprite2D.visible = false
 	$Player.set_objetivo_text("Saia do forte sem ser visto.")
+	$Area2D/Seta.visible = false
 	pegou_chave = true
 
 

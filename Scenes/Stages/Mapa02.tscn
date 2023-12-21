@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://ccfw6oprl2ugv"]
+[gd_scene load_steps=90 format=3 uid="uid://ccfw6oprl2ugv"]
 
 [ext_resource type="Texture2D" uid="uid://cf0ujp5wc2kru" path="res://Assets/Sprites/Background/Tiles/Forte/ParedeAgua/aguaesqcima.png" id="1_4uqm3"]
 [ext_resource type="Texture2D" uid="uid://ce65p7uxc3n31" path="res://Assets/Sprites/Background/Tiles/Forte/ParedeChao/walldirbaixo..png" id="2_yb4tm"]
@@ -13,7 +13,8 @@
 [ext_resource type="Script" path="res://Code/Stages/Mapa02.gd" id="11_mhrek"]
 [ext_resource type="PackedScene" uid="uid://cqmcpt8qutle4" path="res://Scenes/Characters/Player/Player.tscn" id="12_jf8ou"]
 [ext_resource type="PackedScene" uid="uid://bb1j1fdgvmk2f" path="res://Scenes/Characters/NPC/Enemy/AliadoRondando.tscn" id="13_3xlw1"]
-[ext_resource type="Texture2D" uid="uid://pvwwcxywe616" path="res://Assets/Sprites/Characters/General/espada.png" id="14_ictpl"]
+[ext_resource type="Texture2D" uid="uid://bnuckr2utfd1y" path="res://Assets/Sprites/Background/chaves.png" id="14_g1xax"]
+[ext_resource type="Texture2D" uid="uid://detv8xjqj5na8" path="res://Assets/Sprites/Background/seta.png" id="15_lgse0"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_tb3np"]
 tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 2, 196608, 0, 3, 262144, 0, 0, 327680, 0, 1, 393216, 0, 2, 458752, 0, 3, 524288, 0, 0, 589824, 0, 1, 655360, 0, 2, 720896, 0, 3, 786432, 0, 0, 851968, 0, 1, 917504, 0, 2, 983040, 0, 3)
@@ -2087,6 +2088,31 @@ size = Vector2(335, 397)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8dryn"]
 radius = 88.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t8uk2"]
+size = Vector2(538, 538)
+
+[sub_resource type="Animation" id="Animation_27q8w"]
+resource_name = "seta"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Seta:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-25, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xosqr"]
+_data = {
+"seta": SubResource("Animation_27q8w")
+}
+
 [node name="TileMap" type="TileMap" groups=["terrain"]]
 position = Vector2(90, -135)
 tile_set = SubResource("TileSet_ex06q")
@@ -2139,9 +2165,31 @@ position = Vector2(1903, 262)
 shape = SubResource("CircleShape2D_8dryn")
 
 [node name="Sprite2D" type="Sprite2D" parent="Chave"]
-texture = ExtResource("14_ictpl")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("14_g1xax")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(1893, 52)
+rotation = 1.57079
+
+[node name="Seta" type="Sprite2D" parent="Area2D"]
+self_modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(-17.2422, 0)
+rotation = 1.5708
+texture = ExtResource("15_lgse0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_t8uk2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xosqr")
+}
+autoplay = "seta"
 
 [connection signal="body_entered" from="Saida" to="." method="_on_saida_body_entered"]
 [connection signal="body_entered" from="Chave" to="." method="_on_chave_body_entered"]

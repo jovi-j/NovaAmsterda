@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://linddmnccagp"]
+[gd_scene load_steps=17 format=3 uid="uid://linddmnccagp"]
 
 [ext_resource type="PackedScene" uid="uid://bbxarbnaa00t5" path="res://Scenes/Stages/Mapa01.tscn" id="1_0vwlg"]
 [ext_resource type="Script" path="res://Scenes/Stages/Map01.gd" id="1_jrtfk"]
@@ -7,9 +7,94 @@
 [ext_resource type="PackedScene" uid="uid://b2hf1pka0kmx4" path="res://Scenes/Characters/NPC/Ally/ally.tscn" id="3_e4lu1"]
 [ext_resource type="Script" path="res://Scenes/Stages/EnemySpawn.gd" id="6_ago4d"]
 [ext_resource type="AudioStream" uid="uid://xpubnr7otkvu" path="res://Assets/Sound/Music/bucaneers.mp3" id="7_12kks"]
+[ext_resource type="Texture2D" uid="uid://detv8xjqj5na8" path="res://Assets/Sprites/Background/seta.png" id="8_p61li"]
+
+[sub_resource type="Animation" id="Animation_qw2jj"]
+resource_name = "end"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3.3, 4.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v01hf"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ffwff"]
+_data = {
+"end": SubResource("Animation_qw2jj"),
+"start": SubResource("Animation_v01hf")
+}
+
+[sub_resource type="Gradient" id="Gradient_ih1nh"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.0745098, 0.00784314, 0.0313726, 0, 0.27451, 0.054902, 0.168627, 1, 0.0745098, 0.00784314, 0.0313726, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xorxk"]
+gradient = SubResource("Gradient_ih1nh")
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hax4e"]
+size = Vector2(538, 538)
+
+[sub_resource type="Animation" id="Animation_27q8w"]
+resource_name = "seta"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Seta:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-25, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xosqr"]
+_data = {
+"seta": SubResource("Animation_27q8w")
+}
 
 [node name="Forte" type="Node2D"]
 script = ExtResource("1_jrtfk")
+n_of_enemies = 10
 nextScene = ExtResource("2_ldsgj")
 
 [node name="EnemySpawn" type="Node" parent="."]
@@ -65,5 +150,95 @@ objetivoText = "Defenda o forte matando os holandeses."
 stream = ExtResource("7_12kks")
 volume_db = -21.0
 
+[node name="StartAndEnd" type="CanvasLayer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StartAndEnd"]
+libraries = {
+"": SubResource("AnimationLibrary_ffwff")
+}
+
+[node name="ColorRect" type="ColorRect" parent="StartAndEnd"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0745098, 0.00784314, 0.0313726, 1)
+
+[node name="Control" type="Control" parent="StartAndEnd"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="TextureRect" parent="StartAndEnd/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_xorxk")
+
+[node name="CenterContainer" type="CenterContainer" parent="StartAndEnd/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="StartAndEnd/Control/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
+theme_override_colors/font_outline_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_font_sizes/font_size = 80
+text = "Missão Concluída"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(3627, -814)
+
+[node name="Seta" type="Sprite2D" parent="Area2D"]
+self_modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(-17.2422, 0)
+rotation = 1.5708
+texture = ExtResource("8_p61li")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_hax4e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+libraries = {
+"": SubResource("AnimationLibrary_xosqr")
+}
+autoplay = "seta"
+
+[node name="Area2D2" type="Area2D" parent="."]
+position = Vector2(3601, 555)
+
+[node name="Seta" type="Sprite2D" parent="Area2D2"]
+self_modulate = Color(1, 1, 1, 0.74902)
+position = Vector2(-6.48148, 0)
+rotation = 1.5708
+texture = ExtResource("8_p61li")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+visible = false
+position = Vector2(-6, 0)
+shape = SubResource("RectangleShape2D_hax4e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D2"]
+libraries = {
+"": SubResource("AnimationLibrary_xosqr")
+}
+autoplay = "seta"
+
 [connection signal="enemy_spawned" from="EnemySpawn" to="." method="_on_enemy_spawn_enemy_spawned"]
 [connection signal="timeout" from="EnemySpawn/SpawnTimer" to="EnemySpawn" method="_on_spawn_timer_timeout"]
+[connection signal="animation_finished" from="StartAndEnd/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

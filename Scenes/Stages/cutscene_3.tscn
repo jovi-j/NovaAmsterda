@@ -178,8 +178,8 @@ frame_progress = 0.508905
 
 [node name="Label" type="Label" parent="CenterContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.835294, 0.235294, 0.415686, 1)
-theme_override_colors/font_shadow_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_colors/font_color = Color(1, 0.509804, 0.454902, 1)
+theme_override_colors/font_shadow_color = Color(0.835294, 0.235294, 0.415686, 1)
 theme_override_fonts/font = ExtResource("2_gvorr")
 theme_override_font_sizes/font_size = 50
 text = "Os soldados portugueses se renderam."
